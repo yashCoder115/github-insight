@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Insight Lite</title>
+  <meta name="description" content="Analyze any GitHub profile instantly — languages, repos, stats, and smart insights." />
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="landing-view" class="landing">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    GitHub analytics, simplified
+  </div>
+  <h1>GitHub Insight</h1>
+  <p class="subtitle">Instantly explore any GitHub profile — languages, repositories, activity stats, and smart developer insights.</p>
+  <div class="input-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3d4a5c" stroke-width="2" style="flex-shrink:0">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="username-input" type="text" placeholder="Enter a GitHub username…" autocomplete="off" spellcheck="false" />
+    <button class="btn-primary" id="analyze-btn" onclick="analyze()">Analyze</button>
+  </div>
+  <div id="error-msg" class="error-msg">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" style="flex-shrink:0">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <span id="error-text"></span>
+  </div>
+</div>
+
+<!-- LOADER -->
+<div id="loader-view" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1.5rem;text-align:center;">
+  <div class="spinner"></div>
+  <p class="loader-text" id="loader-text">Fetching profile…</p>
+</div>
+
+<!-- RESULTS -->
+<div id="results-view">
+  <div class="results-inner">
+    <button class="back-btn" onclick="goBack()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+      Search again
+    </button>
+
+    <!-- Profile -->
+    <div class="glass profile-card" id="profile-card"></div>
+
+    <!-- Stats + Languages -->
+    <div class="grid-2">
+      <div class="glass">
+        <div class="card-body">
+          <p class="card-label">Quick stats</p>
+          <div class="stat-grid" id="stat-grid"></div>
+        </div>
+      </div>
+      <div class="glass">
+        <div class="card-body">
+          <p class="card-label">Top languages</p>
+          <div id="lang-bars"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insights -->
+    <div class="glass insights-card">
+      <div class="section-head"><p class="card-label" style="margin-bottom:0">Smart insights</p></div>
+      <div id="insights-list"></div>
+    </div>
+
+    <!-- Repos -->
+    <div class="glass repos-card">
+      <div class="section-head" style="padding-bottom:0.5rem"><p class="card-label" style="margin-bottom:0">Recent repositories</p></div>
+      <ul class="repo-list" id="repo-list"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  Built with the <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener">GitHub REST API</a> &nbsp;·&nbsp;
+  <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+</footer>
+<script src="./script.js"></script>
+</body>
+</html>
+
